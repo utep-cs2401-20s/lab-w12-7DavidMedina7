@@ -1,14 +1,15 @@
 class myBinarySearchTreeNode{
+
+  // Attributes of a tree node
   int myValue;
   myBinarySearchTreeNode left;
   myBinarySearchTreeNode right;
-    
+
   myBinarySearchTreeNode(int inValue){
     // created a new node with empty child pointers
     myValue = inValue;
     left = null;
     right  = null;
-
   }
   
   myBinarySearchTreeNode(int[] A){
@@ -157,5 +158,4 @@ class myBinarySearchTreeNode{
     if(left != null) left.print(prefix + "\u251C ");
     if(right != null) right.print(prefix + "\u2514 ");
   }
-  
 } 
