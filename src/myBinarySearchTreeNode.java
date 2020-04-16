@@ -1,7 +1,52 @@
 class myBinarySearchTreeNode{
 
+  public static void main(String[] args) {
+
+//    myBinarySearchTreeNode tree = new myBinarySearchTreeNode(A);
+//    System.out.println();
+//    tree.print();
+//    System.out.println("Size of tree: " + tree.size());
+//    System.out.println("Height of tree: " + tree.height());
+//    System.out.println("Depth of node 3: " + tree.depth(3));
+//    System.out.println();
+//    System.out.println("Inserting node 7... ");
+//    System.out.println("Inserting node 8... ");
+//    System.out.println("Inserting node 10... ");
+//    System.out.println("Inserting node 4... ");
+//    System.out.println("Inserting node 2... ");
+//    System.out.println("Inserting node 10... ");
+//
+//    tree.insert(7);
+//    tree.insert(8);
+//    tree.insert(10);
+//    tree.insert(5);
+//    tree.insert(2);
+//    tree.insert(10);
+//    tree.print();
+//    System.out.println("Size of tree: " + tree.size());
+//    System.out.println("Height of tree: " + tree.height());
+//    System.out.println("Depth of node 8: " + tree.depth(8));
+
+    System.out.println();
+    myBinarySearchTreeNode tree = new myBinarySearchTreeNode(B);
+    tree.print();
+    System.out.println("Size of tree: " + tree.size());
+    System.out.println("Height of tree: " + tree.height());
+    System.out.println("Depth of node 11: " + tree.depth(11));
+
+    System.out.println();
+    System.out.println("Inserting node 10... ");
+    tree.insert(10);
+    tree.print();
+    System.out.println("Size of tree: " + tree.size());
+    System.out.println("Height of tree: " + tree.height());
+    System.out.println("Depth of node 10: " + tree.depth(10));
+  }
+
   // Attributes of a tree node
-  int myValue;
+  public static int[] A = {3, 1, 2, 4};
+  public static int[] B = {7, 14, 18, 4, 11, 21};
+  int myValue = B[0];
   myBinarySearchTreeNode left;
   myBinarySearchTreeNode right;
 
@@ -17,10 +62,11 @@ class myBinarySearchTreeNode{
     /// by inserting elements into the tree in the order they are given in A.
 
     // Creating the root node of the tree
-    myBinarySearchTreeNode tree = new myBinarySearchTreeNode(A[0]);
+    //myBinarySearchTreeNode tree = new myBinarySearchTreeNode(A[0]);
+
     // Loop to add the rest of the elements into the tree
     for(int i = 1; i < A.length; i++) {
-      tree.insert(A[i]);
+      this.insert(A[i]);
     }
   }
   
@@ -57,8 +103,7 @@ class myBinarySearchTreeNode{
       }
       // If there is a duplicate node, don't insert it
       if(inValue == myValue) {
-        // FIXME: HOW TO PREVENT DUPLICATES
-        System.out.print("ERROR: DUPLICATE NODE IS NOT ALLOWED");
+        System.out.print("ERROR: DUPLICATE NODE IS NOT ALLOWED\n");
       }
     }
     
@@ -69,25 +114,20 @@ class myBinarySearchTreeNode{
      // This method will take O(n) time
 
     // Creating a variables left and right height to keep track of the height of the tree
-    // FIXME: VARIABLES WILL REINITIALIZE
-    int treeHeight;
-    int leftHeight = 0;
-    int rightHeight = 0;
+      int treeHeight;
+      int leftHeight = 0;
+      int rightHeight = 0;
 
     // If there is a left node
     if(left != null) {
-      // Increment leftHeight
-      leftHeight++;
       // Make recursive call
-      leftHeight = height();
+      leftHeight = left.height();
     }
 
     // If there is a right node
     if(right != null) {
-      // Increment rightHeight
-      rightHeight++;
       // Make recursive call
-      rightHeight = height();
+      rightHeight = right.height();
     }
 
     // Comparing the height of left and right subtree and assigning the greater one to the final height
@@ -96,7 +136,6 @@ class myBinarySearchTreeNode{
     }else {
       treeHeight = rightHeight;
     }
-
      return treeHeight + 1;
   }
   
@@ -109,19 +148,29 @@ class myBinarySearchTreeNode{
 
     // If search is less than myValue
     if(search < myValue) {
-      // Make recursive call
-      left.depth(myValue + 1);
+      // If there is a left node
+      if(left != null) {
+        // Make recursive call
+        return left.depth(search) + 1;
+      }else{
+        return -1;
+      }
     }
 
     // If search is greater than myValue
     if(search > myValue) {
-      // Make recursive call
-      right.depth(myValue + 1);
+      // If there is a right node
+      if(right != null) {
+        // Make recursive call
+        return right.depth(search) + 1;
+      } else {
+        return -1;
+      }
     }
 
-    // If search and myValue are the same return 1
+    // If search and myValue are the same return 0
     if(search == myValue) {
-      return 1;
+      return 0;
     }
     // Can't go left, right, or search does not exist return -1
     return -1;
